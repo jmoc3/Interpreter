@@ -3,28 +3,42 @@ package token
 type TokenType string
 
 type Token struct {
-  Type TokenType
-  Literal byte
+	Type    TokenType
+	Literal []byte
 }
 
 const (
-  ILLEGAL = "ILLEGAL"
-  EOF = "EOF"
+	ILLEGAL = "ILLEGAL"
+	EOF     = "EOF"
 
-  IDENT = "IDENT"
-  INT = "INT"
+	IDENT = "IDENT"
+	INT   = "INT"
 
-  ASSIGN = "="
-  PLUS = "+"
+	ASSIGN = "="
+	PLUS   = "+"
 
-  COMMA = ","
-  SEMICOLON = ";"
+	COMMA     = ","
+	SEMICOLON = ";"
 
-  LPAREN = "("
-  RPAREN = ")"
-  LBRACE = "{"
-  RBRACE = "}"
+	LPAREN = "("
+	RPAREN = ")"
+	LBRACE = "{"
+	RBRACE = "}"
 
-  FUNCTION = "FUNCTION"
-  LET = "LET"
+	FUNCTION = "FUNCTION"
+	LET      = "LET"
+	SPACE    = " "
 )
+
+var identifiersMap = map[string]TokenType{
+	"fn":  FUNCTION,
+	"let": LET,
+}
+
+func GetTokenTypeByBytes(str []byte) TokenType {
+	if tok, ok := identifiersMap[string(str)]; ok {
+		return tok
+	}
+
+	return IDENT
+}
