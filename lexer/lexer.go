@@ -1,7 +1,6 @@
 package lexer
 
 import (
-	"fmt"
 	"orj/token"
 )
 
@@ -31,7 +30,6 @@ func (lexer *Lexer) readChar() {
 func (lexer *Lexer) NextToken() token.Token {
 
 	var tok token.Token
-	fmt.Println("Caracteres actuales en el leer", lexer.ch, string(lexer.ch))
 	lexer.skipWhiteSpaces()
 
 	switch lexer.ch {
@@ -109,7 +107,6 @@ func (lexer *Lexer) readIdentifier() []byte {
 		lexer.readChar()
 	}
 
-	fmt.Println("Bytes completos: ", []byte(lexer.input[position:lexer.position]))
 	return []byte(lexer.input[position:lexer.position])
 }
 
