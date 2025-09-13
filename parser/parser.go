@@ -1,7 +1,6 @@
 package parser
 
 import (
-	"fmt"
 	"orj/ast"
 	"orj/lexer"
 	"orj/token"
@@ -37,8 +36,10 @@ func (parser *Parser) ParseProgram() *ast.Program {
 		if statement != nil {
 			program.Statements = append(program.Statements, statement)
 		}
+		parser.nextToken()
 	}
-	return nil
+
+	return program
 }
 
 func (parser *Parser) parseStatement() ast.Statement {
@@ -63,11 +64,9 @@ func (parser *Parser) parseLetStatement() *ast.LetStatement {
 		return nil
 	}
 
-	fmt.Printf("In for: %s, %s", parser.currentToken, parser.peekToken)
-	// for !parser.currentTokenIs(token.SEMICOLON) {
-	// 	fmt.Printf("In for: %s, %s", parser.currentToken, parser.peekToken)
-	// 	parser.nextToken()
-	// }
+	for !parser.currentTokenIs(token.SEMICOLON) {
+		parser.nextToken()
+	}
 
 	return statement
 }
