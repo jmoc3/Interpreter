@@ -30,7 +30,7 @@ func (program *Program) TokenLiteral() []byte {
 
 type Identifier struct {
 	Token token.Token
-	Value string
+	Value []byte
 }
 
 type LetStatement struct {
@@ -39,12 +39,12 @@ type LetStatement struct {
 	Value Expression
 }
 
-func (letStatement *LetStatement) statementNode()
+func (letStatement *LetStatement) statementNode() {}
 func (letStatement *LetStatement) TokenLiteral() []byte {
 	return letStatement.Token.Literal
 }
 
-func (identifier *Identifier) expressionNode()
+func (identifier *Identifier) expressionNode() {}
 func (identifier *Identifier) TokenLitera() []byte {
 	return identifier.Token.Literal
 }
